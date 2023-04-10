@@ -59,7 +59,7 @@ export const create = async (req, res) => {
 };
 export const remove = async (req, res) => {
     try {
-        const category = await Category.findByIdAndDelete(req.params.id);
+        const category = await Category.findByIdAndDelete({_id: req.params.id});
         return res.status(200).json({
             message: "Sản phẩm đã được xóa thành công",
             category,
@@ -73,7 +73,7 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const category = await Category.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const category = await Category.findByIdAndUpdate({_id: req.params.id}, req.body, { new: true });
         if (!category) {
             return res.status(404).json({
                 message: "Không tìm thấy sản phẩm",
